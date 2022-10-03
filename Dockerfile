@@ -124,3 +124,7 @@ EXPOSE 8080
 
 # configure entrypoint
 ENTRYPOINT ["/usr/sbin/nginx","-g","daemon off;"]
+
+LABEL \
+    org.opencontainers.image.title="nginx-ssl" \
+    org.opencontainers.image.source="https://github.com/coolguy1771/docker-nginx-ssl"
