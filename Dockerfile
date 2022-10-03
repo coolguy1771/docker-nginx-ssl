@@ -49,7 +49,7 @@ RUN git clone https://github.com/aperezdc/ngx-fancyindex.git /src/ngx-fancyindex
 
 # download nginx source
 WORKDIR /src/nginx
-ARG NGINX_VER = $(curl -s https://nginx.org/en/download.html | grep -oP 'nginx-[0-9.]+.tar.gz' | head -n 1 | cut -d'-' -f2 | cut -d'.' -f1-3)
+ARG NGINX_VER="$(curl -s https://nginx.org/en/download.html | grep -oP 'nginx-[0-9.]+.tar.gz' | head -n 1 | cut -d'-' -f2 | cut -d'.' -f1-3)"
 RUN curl -L -O "http://nginx.org/download/nginx-${NGINX_VER}.tar.gz" \
     && tar xzf "nginx-${NGINX_VER}.tar.gz"
 
