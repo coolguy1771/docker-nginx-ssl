@@ -86,7 +86,7 @@ RUN ./configure --prefix=/usr/share/nginx \
                 --without-mail_smtp_module \
                 --with-cc-opt="-O2 -flto -ffunction-sections -fdata-sections -fPIE -fstack-protector-all -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security" \
                 --with-ld-opt="-Wl,--gc-sections -s -static -static-libgcc" \
-    && make -j "4" \
+    && make -j $(nproc) \
     && make install
 
 # compress the nginx binary
