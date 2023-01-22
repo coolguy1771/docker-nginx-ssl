@@ -23,21 +23,21 @@ RUN apt-get update \
 # download pcre library
 WORKDIR /src/pcre
 ARG PCRE_VER=10.42
-RUN curl -L -O "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-${PCRE_VER}/pcre2-${PCRE_VER}.tar.gz" \
-    && tar xzf "/src/pcre/pcre-${PCRE_VER}.tar.gz"
+RUN curl -L -O "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.gz" \
+    && tar xzf "/src/pcre/pcre-10.42.tar.gz"
 
 # download openssl
 ARG OPENSSL_VER=openssl-3.0.7
 WORKDIR /src/openssl
-RUN git clone -b "${OPENSSL_VER}" git://git.openssl.org/openssl.git /src/openssl
+RUN git clone -b "openssl-3.0.7" git://git.openssl.org/openssl.git /src/openssl
 ARG CORE_COUNT=1
 RUN ./config && make -j"${CORE_COUNT}"
 
 # download zlib
 WORKDIR /src/zlib
 ARG ZLIB_VER=1.2.13
-RUN curl -L -O "https://www.zlib.net/zlib-${ZLIB_VER}.tar.gz" \
-    && tar xzf "zlib-${ZLIB_VER}.tar.gz"
+RUN curl -L -O "https://www.zlib.net/zlib-1.2.13.tar.gz" \
+    && tar xzf "zlib-1.2.13.tar.gz"
 
 # download brotli module
 WORKDIR /src/ngx_brotli
@@ -66,8 +66,8 @@ RUN ./configure --prefix=/usr/share/nginx \
                 --http-proxy-temp-path=/tmp/nginx/proxy \
                 --with-threads \
                 --with-file-aio \
-                --with-zlib="/src/zlib/zlib-${ZLIB_VER}" \
-                --with-pcre="/src/pcre/pcre-${PCRE_VER}" \
+                --with-zlib="/src/zlib/zlib-1.2.13" \
+                --with-pcre="/src/pcre/pcre-10.42" \
                 --with-pcre-jit \
                 --with-http_addition_module \
                 --with-http_random_index_module \
