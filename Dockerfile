@@ -25,7 +25,7 @@ RUN curl -L -O "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-${
 ARG OPENSSL_VER=openssl-3.0.7
 WORKDIR /src/openssl
 RUN git clone -b "${OPENSSL_VER}" git://git.openssl.org/openssl.git /src/openssl
-ARG CORE_COUNT=1
+ARG CORE_COUNT=$(nproc)
 RUN ./config && make -j"${CORE_COUNT}"
 
 # download zlib
