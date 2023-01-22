@@ -17,9 +17,9 @@ RUN apt-get update \
 
 # download pcre library
 WORKDIR /src/pcre
-ARG PCRE_VER=10.37
-RUN curl -L -O "https://sourceforge.net/projects/pcre/files/pcre2/${PCRE_VER}/pcre2-${PCRE_VER}.tar.gz/download" \
-    && tar xzf "/src/pcre/pcre-${PCRE_VER}.tar.gz"
+ARG PCRE_VER=10.42
+RUN curl -L -O "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-${PCRE_VER}/pcre2-${PCRE_VER}.tar.gz" \
+    && tar xzf "/src/pcre/pcre2-${PCRE_VER}.tar.gz"
 
 # download openssl
 ARG OPENSSL_VER=openssl-3.0.7
