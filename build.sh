@@ -8,7 +8,7 @@ set -o errexit
 registry="${REGISTRY:-local}"
 
 # retrieve latest nginx version
-nginx_mainline="$(curl -s 'https://nginx.org/en/download.html' | grep -oP 'href="nginx-\K[0-9]+\.[0-9]+\.[0-9]+' | sort -t. -rn -k1,1 -k2,2 -k3,3 | head -1)"
+nginx_mainline="$(curl -s 'http://nginx.org/download/' | grep -oP 'href="nginx-\K[0-9]+\.[0-9]+\.[0-9]+' | sort -t. -rn -k1,1 -k2,2 -k3,3 | head -1)"
 
 # if no version is specified, use the mainline version
 image_version="${1:-$nginx_mainline}"
@@ -32,9 +32,8 @@ docker buildx build --build-arg NGINX_VER="${image_version}" \
                     -f Dockerfile . \
                     --load
 
-# push amd64 and arm images to remote registry
-docker buildx build --platform linux/amd64,linux/arm,linux/arm64 \
-                    --build-arg NGINX_VER="${image_version}" \
+# push images to remote registry
+docker buildx build --build-arg NGINX_VER="${image_version}" \
                     --build-arg CORE_COUNT="${core_count}" \
                     -t "${registry}/${image_name}:${image_version}" \
                     $(if [ "${LATEST}" == "yes" ]; then echo "-t ${registry}/${image_name}:latest"; fi) \
