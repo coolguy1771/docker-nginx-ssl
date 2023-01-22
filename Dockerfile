@@ -23,8 +23,8 @@ RUN apt-get update \
 # download pcre library
 WORKDIR /src/pcre
 ARG PCRE_VER=10.42
-RUN curl -L -O "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.gz" \
-    && tar xzf "/src/pcre/pcre-10.42.tar.gz"
+    RUN curl -L -O "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.gz" \
+        && tar xzf "pcre-10.42.tar.gz"
 
 # download openssl
 ARG OPENSSL_VER=openssl-3.0.7
@@ -49,7 +49,7 @@ RUN git clone https://github.com/aperezdc/ngx-fancyindex.git /src/ngx-fancyindex
 
 # download nginx source
 WORKDIR /src/nginx
-ARG NGINX_VER=1.23.1
+ARG NGINX_VER=1.23.3
 RUN curl -L -O "http://nginx.org/download/nginx-${NGINX_VER}.tar.gz" \
     && tar xzf "nginx-${NGINX_VER}.tar.gz"
 
